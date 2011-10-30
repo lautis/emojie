@@ -7,7 +7,6 @@ describe("emojie", function() {
   it("replaces single emoji character with image in single text node", function() {
     var node = $("<div>").text("foo \ud83d\ude04 bar");
     emojie(node[0].childNodes[0]);
-    console.log(node.html())
     expect(node.html().indexOf("<img ")).toNotBe(-1);
   });
 
@@ -23,7 +22,6 @@ describe("emojie", function() {
       $("<span>").text("e \ud83d\ude04 moji")
     );
     emojie(node[0]);
-    console.log(node.html())
     expect(node.html().split("<img ").length).toBe(3)
   });
 
@@ -33,7 +31,6 @@ describe("emojie", function() {
       $("<span>").text("e \ud83d\ude04 moji")
     );
     emojie(node[0], "sprite.png");
-    console.log(node.html())
     expect(node.html().indexOf("sprite.png")).toNotBe(-1)
   });
 
@@ -43,7 +40,6 @@ describe("emojie", function() {
     );
     var old = emojie.src;
     emojie.src = "/emoji-sprite.png";
-    emojie(node[0]);
     expect(node.html().indexOf("/emoji-sprite.png")).toNotBe(-1)
     emojie.src = old;
   });
