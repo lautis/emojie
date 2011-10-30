@@ -1,8 +1,5 @@
 (function(window, undefined) {
-  var emojis = {
-    "\ud83d": true,
-    "\ud83d\ude04": "1f604"
-  }
+  var emojis = {};
 
   function traverseTextNodes(root, callback) {
     var children = root.childNodes;
@@ -64,6 +61,15 @@
 
     return node;
   }
-  emojie.src = "emojie.png"
+
+  window.emojie.register = function(emoji, image) {
+    var i;
+    for (i = 1; i < emoji.length; i++) {
+      emojis[emoji.slice(0, i)] = true;
+    }
+    emojis[emoji] = image;
+  }
+
+  window.emojie.src = "emojie.png"
 
 }(window));

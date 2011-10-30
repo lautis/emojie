@@ -1,4 +1,6 @@
 describe("emojie", function() {
+  emojie.register("\ud83d\ude04", "1f604");
+
   it("doesn't do anything if string doesn't contain emoji", function() {
     var node = $("<div>").text("foo bar")[0].childNodes[0]
     expect(emojie(node).textContent).toBe(node.textContent);
@@ -40,6 +42,7 @@ describe("emojie", function() {
     );
     var old = emojie.src;
     emojie.src = "/emoji-sprite.png";
+    emojie(node[0]);
     expect(node.html().indexOf("/emoji-sprite.png")).toNotBe(-1)
     emojie.src = old;
   });
