@@ -32,7 +32,7 @@ describe("emojie", function() {
     var node = $("<div>").append(
       $("<span>").text("e \ud83d\ude04 moji")
     );
-    emojie(node[0], "sprite.png");
+    emojie(node[0], {src: "sprite.png"});
     expect(node.html().indexOf("sprite.png")).toNotBe(-1)
   });
 
