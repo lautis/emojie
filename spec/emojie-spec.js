@@ -18,6 +18,12 @@ describe("emojie", function() {
     expect(node.html().split("<img ").length).toBe(3);
   });
 
+  it("works when emoji is at the end of text node", function() {
+    var node = $("<div>").text("foo \ud83d\ude04");
+    emojie(node[0]);
+    expect(node.html().split("<img").length).toBe(2);
+  });
+
   it("replaces emojis in DOM tree", function() {
     var node = $("<div>").append(
       $("<span>").text("e \ud83d\ude04 moji"),
