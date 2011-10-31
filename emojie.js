@@ -1,3 +1,10 @@
+/*!
+ * Emojie
+ *
+ * Copyright (C) 2011 by Ville Lautanala
+ * Licensed under the MIT license
+ */
+
 (function(window, undefined) {
   var emojis = {};
 

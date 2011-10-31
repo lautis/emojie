@@ -10,6 +10,10 @@ JavaScript library which aims to provide fallbacks for Emoji glyphs as images.
 
 # TODO
 
-* feature detect emoji support
 * figure out if there are emoji images with suitable license
-* create pre-defined mappings to images
+
+# License
+
+Emojie is licensed under MIT license. This license doesn't apply to images.
+
+The iPhone Emoji glyps (c) Apple.
