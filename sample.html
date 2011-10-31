@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta encoding="utf-8" />
+    <title>Emojie test page</title>
+    <script src="emojie.js"></script>
+    <script src="emojie-iphone.js"></script>
+    <script>
+      emojie.path = "assets/iphone/";
+      window.onload = function() {
+        emojie(document.getElementById("emojie"));
+      }
+    </script>
+    <style>
+      img.emojie {
+        height: 1.25em;
+        vertical-align: baseline;
+      }
+    </style>
+  </head>
+  <body>
+    <p id="native">&#x1F3A4;test&#x1F481;</p>
+    <p id="emojie">&#x1F3A4;test&#x1F481;</p>
+  </body>
+</html>
