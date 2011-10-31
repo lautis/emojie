@@ -76,5 +76,24 @@
     emojis[emoji] = image;
   }
 
+  emojie.canRender = function(emoji) {
+    function hasColor(ctx, width) {
+      var data = ctx.getImageData(0, 0, width, width).data;
+      var i;
+
+      for (i = 0; i < data.length; i += 4) {
+        if (data[i] != data[i + 1] && data[i] != data[i + 2]) {
+          return true;
+        }
+      }
+      return false;
+    }
+
+    var ctx = document.createElement("canvas").getContext("2d");
+    ctx.fillText(emoji, 0, 0);
+
+    return hasColor(ctx, 10)
+  }
+
   window.emojie = emojie;
 }(window));

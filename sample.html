@@ -9,6 +9,11 @@
       emojie.path = "assets/iphone/";
       window.onload = function() {
         emojie(document.getElementById("emojie"));
+        if (emojie.canRender("\ud83d\ude04")) {
+          document.getElementById("emoji-support").innerText = "yes"
+        } else {
+          document.getElementById("emoji-support").innerText = "no"
+        }
       }
     </script>
     <style>
@@ -21,5 +26,6 @@
   <body>
     <p id="native">&#x1F3A4;test&#x1F481;</p>
     <p id="emojie">&#x1F3A4;test&#x1F481;</p>
+    <p>Can render emoji <span id="emoji-support"></span></p>
   </body>
 </html>
