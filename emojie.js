@@ -9,23 +9,13 @@
   var emojis = {};
 
   function traverseTextNodes(root, callback) {
-    var children = root.childNodes;
-    var length = children.length;
-    if (length == 0) return 0;
-
-    var i, r, node;
-    for (i = 0; i < length; i++) {
-      node = children[i];
-      if (node.nodeType == 3) {
-        callback(node);
-        r = children.length;
-        i += r - length;
-        length = r;
-      } else {
-        traverseTextNodes(node, callback);
-      }
+    if (root == null) { return; }
+    if (root.nodeType == 3) {
+      return callback(root);
     }
-    return root;
+
+    traverseTextNodes(root.firstChild, callback);
+    traverseTextNodes(root.nextSibling, callback);
   }
 
   function emojiElement(emoji, options) {
@@ -66,12 +56,7 @@
 
   function emojie(node, options) {
     var replacer = textNodeReplacer(options);
-    if (node.nodeType == 3) {
-      replacer(node);
-    } else {
-      traverseTextNodes(node, replacer);
-    }
-
+    traverseTextNodes(node, replacer);
     return node;
   }
 
