@@ -10,12 +10,14 @@
 
   function traverseTextNodes(root, callback) {
     if (root == null) { return; }
+
+    traverseTextNodes(root.nextSibling, callback);
+
     if (root.nodeType == 3) {
       return callback(root);
     }
 
     traverseTextNodes(root.firstChild, callback);
-    traverseTextNodes(root.nextSibling, callback);
   }
 
   function emojiElement(emoji, options) {
