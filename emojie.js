@@ -45,8 +45,8 @@
         if (emojis[buffer] === true) {
           continue;
         } else if (emojis[buffer]) {
-          emoji = node.splitText(i);
-          rest = emoji.splitText(buffer.length - 1);
+          emoji = node.splitText(i - buffer.length + 1);
+          rest = emoji.splitText(buffer.length);
           node.parentNode.replaceChild(emojiElement(emojis[buffer], options), emoji);
           return replacer(rest);
         } else {
