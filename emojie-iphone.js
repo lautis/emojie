@@ -1,3 +1,4 @@
+emojie = Emojie();
 emojie.register("\u0023\u20e3", "0023-20e3.png");
 emojie.register("\u0030\u20e3", "0030-20e3.png");
 emojie.register("\u0031\u20e3", "0031-20e3.png");

@@ -22,18 +22,18 @@
 
   function emojiElement(emoji, options) {
     var element = document.createElement("img");
-    if ((options || {})["src"] || emojie.src) {
-      element.setAttribute("src", (options || {})["src"] || emojie.src);
+    if ((options || {})["src"]) {
+      element.setAttribute("src", (options || {})["src"]);
     } else if (emoji.indexOf("/") == 0) {
       element.setAttribute("src", emoji);
     } else {
-      element.setAttribute("src", ((options || {})["path"] || emojie.path || "") + "/" + emoji);
+      element.setAttribute("src", ((options || {})["path"] || "") + "/" + emoji);
     }
     element.className = "emojie " + "emojie-" + emoji;
     return element
   }
 
-  function textNodeReplacer(options) {
+  function textNodeReplacer(emojis, options) {
     return function replacer(node) {
       var string = node.textContent || node.data;
       var i = 0;
@@ -56,21 +56,7 @@
     }
   }
 
-  function emojie(node, options) {
-    var replacer = textNodeReplacer(options);
-    traverseTextNodes(node, replacer);
-    return node;
-  }
-
-  emojie.register = function(emoji, image) {
-    var i;
-    for (i = 1; i < emoji.length; i++) {
-      emojis[emoji.slice(0, i)] = true;
-    }
-    emojis[emoji] = image;
-  }
-
-  emojie.canRender = function(emoji) {
+  Emojie.canRender = function(emoji) {
     function hasColor(ctx, width) {
       var data = ctx.getImageData(0, 0, width, width).data;
       var i;
@@ -89,5 +75,36 @@
     return hasColor(ctx, 10)
   }
 
-  window.emojie = emojie;
+  function Emojie(options) {
+    var defaults = options || {};
+    var emojis = {};
+    function emojie(node, options) {
+      var settings = defaults;
+      settings.src = emojie.src;
+      settings.path = emojie.path;
+
+      for (option in options) {
+        settings[option] = options[option];
+      }
+
+      var replacer = textNodeReplacer(emojis, settings);
+      if (node.nodeType == 3) {
+        replacer(node);
+      } else {
+        traverseTextNodes(node.firstChild, replacer);
+      }
+      return node;
+    }
+
+    emojie.register = function(emoji, image) {
+      var i;
+      for (i = 1; i < emoji.length; i++) {
+        emojis[emoji.slice(0, i)] = true;
+      }
+      emojis[emoji] = image;
+    }
+
+    return emojie;
+  }
+  window.Emojie = Emojie;
 }(window));

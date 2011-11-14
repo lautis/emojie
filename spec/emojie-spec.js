@@ -1,4 +1,5 @@
 describe("emojie", function() {
+  var emojie = Emojie();
   emojie.register("\ud83d\ude04", "1f604");
 
   it("doesn't do anything if string doesn't contain emoji", function() {
