@@ -24,10 +24,8 @@
     var element = document.createElement("img");
     if ((options || {})["src"]) {
       element.setAttribute("src", (options || {})["src"]);
-    } else if (emoji.indexOf("/") == 0) {
-      element.setAttribute("src", emoji);
     } else {
-      element.setAttribute("src", ((options || {})["path"] || "") + "/" + emoji);
+      element.setAttribute("src", ((options || {})["path"] || "") + emoji);
     }
     element.className = "emojie " + "emojie-" + emoji;
     return element
