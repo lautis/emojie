@@ -33,7 +33,7 @@
 
   function textNodeReplacer(emojis, options) {
     return function replacer(node) {
-      var string = node.textContent || node.data;
+      var string = node.data;
       var i = 0;
       var emoji, rest;
       var buffer = "";
@@ -44,9 +44,18 @@
           continue;
         } else if (emojis[buffer]) {
           emoji = node.splitText(i - buffer.length + 1);
-          rest = emoji.splitText(buffer.length);
+
+          if (emoji.length > buffer.length) {
+            rest = emoji.splitText(buffer.length);
+          }
+
           node.parentNode.replaceChild(emojiElement(emojis[buffer], options), emoji);
-          return replacer(rest);
+
+          if (rest) {
+            return replacer(rest);
+          } else {
+            return;
+          }
         } else {
           buffer = "";
         }

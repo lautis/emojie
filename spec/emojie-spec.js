@@ -16,6 +16,7 @@ describe("emojie", function() {
   it("can handle multiple emojis in same string", function() {
     var node = $("<div>").text("foo \ud83d\ude04 bar \ud83d\ude04 lol");
     emojie(node[0].childNodes[0]);
+    console.log(node.html());
     expect(node.html().split("<img ").length).toBe(3);
   });
 
