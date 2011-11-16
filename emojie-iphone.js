@@ -302,7 +302,7 @@ emojie.register("\ud83d\udcfa", "1f4fa.png");
 emojie.register("\ud83d\udcfb", "1f4fb.png");
 emojie.register("\ud83d\udcfc", "1f4fc.png");
 emojie.register("\ud83d\udd0a", "1f50a.png");
-emojie.register("\ud83d\udd0e", "1f50e.png");
+emojie.register("\ud83d\udd0d", "1f50d.png");
 emojie.register("\ud83d\udd11", "1f511.png");
 emojie.register("\ud83d\udd12", "1f512.png");
 emojie.register("\ud83d\udd13", "1f513.png");
