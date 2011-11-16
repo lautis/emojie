@@ -15,6 +15,7 @@ end
 
 task :iphone do
   File.open("emojie-iphone.js","w") do |f|
+    f.write("emojie = Emojie();\n")
     Dir["assets/iphone/*.png"].map do |filename|
       mapping = filename.split("/").last
       f.write("emojie.register(\"" + mapping.split(".").first.split("-").map do |d|
