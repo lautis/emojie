@@ -76,10 +76,14 @@
       return false;
     }
 
-    var ctx = document.createElement("canvas").getContext("2d");
-    ctx.fillText(emoji, 0, 0);
+    try {
+      var ctx = document.createElement("canvas").getContext("2d");
+      ctx.fillText(emoji, 0, 0);
 
-    return hasColor(ctx, 10)
+      return hasColor(ctx, 10);
+    } catch (ex) {
+      return false;
+    }
   }
 
   function Emojie(options) {
