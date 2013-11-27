@@ -8,11 +8,11 @@ JavaScript library which aims to provide fallbacks for Emoji glyphs as images.
     emojie.register("\ud83d\ude04", options);
     emojie(document.body);
 
-Options is set individually for each emoji. The only required option is the src option, which should point to the image to be used for each emoji. Other options that can be set are code and attrs. Attrs will set each attribute of the given object as attributes on the resulting img element. Code will add "emojie-#{code}" as a class to the img element.
+Options is set individually for each emoji. All options will be transfered as attributes to the img element, so you might want to at least set the src attribute.
 
 An example to clarify:
 
-  emojie.register("\ud83d\ude04", { src: "emoji/smile.png", code: 'smile', attrs: { title: "smile!", id: "example-smiley" } });
+  emojie.register("\ud83d\ude04", { src: "emoji/smile.png", code: "smile", title: "smile!", id: "example-smiley" });
   emojie(document.body);
   // <img src="emoji/smile.png" id="example-smiley" class="emojie emojie-smile" title="smile!">
 

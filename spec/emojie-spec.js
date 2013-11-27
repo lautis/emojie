@@ -1,6 +1,6 @@
 describe("emojie", function() {
   var emojie = Emojie();
-  emojie.register("\ud83d\ude04", {code: "1f604", src: "http://localhost/emoji/emoji.png", attrs: { title: ":foo_bar:", id: "test-id" } });
+  emojie.register("\ud83d\ude04", { class: "emojie emojie-1f604", src: "http://localhost/emoji/emoji.png", title: ":foo_bar:", id: "test-id" });
 
   it("doesn't do anything if string doesn't contain emoji", function() {
     var node = $("<div>").text("foo bar")[0].childNodes[0]
@@ -42,10 +42,9 @@ describe("emojie", function() {
   });
 
   it ("does not require the code option to be set", function() {
-    emojie.register("\ud83d\ude04", {src: "http://localhost/emoji/emoji.png", attrs: { title: ":foo_bar:", id: "test-id" } });
     var node = $("<div>").text("foo \ud83d\ude04");
     emojie(node[0]);
-    expect(node.find("img")[0].className).toBe("emojie");
+    expect(node.find("img")[0].className).toBe("emojie emojie-1f604");
   });
 
 });
