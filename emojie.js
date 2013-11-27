@@ -20,18 +20,20 @@
     traverseTextNodes(root.firstChild, callback);
   }
 
-  function emojiElement(emoji, options) {
+  function emojiElement(emojiHash) {
+
     var element = document.createElement("img");
-    if ((options || {})["src"]) {
-      element.setAttribute("src", (options || {})["src"]);
-    } else {
-      element.setAttribute("src", ((options || {})["path"] || "") + emoji);
+
+    element.setAttribute("src", emojiHash["src"]);
+    element.className = "emojie " + "emojie-" + emojiHash["code"];
+
+    for (attr in emojiHash["attrs"]) {
+      element.setAttribute(attr, emojiHash["attrs"][attr])
     }
-    element.className = "emojie " + "emojie-" + emoji;
     return element
   }
 
-  function textNodeReplacer(emojis, options) {
+  function textNodeReplacer(emojis) {
     return function replacer(node) {
       var string = node.data;
       var i = 0;
@@ -49,7 +51,7 @@
             rest = emoji.splitText(buffer.length);
           }
 
-          node.parentNode.replaceChild(emojiElement(emojis[buffer], options), emoji);
+          node.parentNode.replaceChild(emojiElement(emojis[buffer]), emoji);
 
           if (rest) {
             return replacer(rest);
@@ -86,19 +88,13 @@
     }
   }
 
-  function Emojie(options) {
-    var defaults = options || {};
+  function Emojie() {
     var emojis = {};
-    function emojie(node, options) {
-      var settings = defaults;
-      settings.src = emojie.src;
-      settings.path = emojie.path;
 
-      for (option in options) {
-        settings[option] = options[option];
-      }
+    function emojie(node) {
 
-      var replacer = textNodeReplacer(emojis, settings);
+      var replacer = textNodeReplacer(emojis);
+
       if (node.nodeType == 3) {
         replacer(node);
       } else {
@@ -106,13 +102,20 @@
       }
       return node;
     }
-
-    emojie.register = function(emoji, image) {
+    /*
+      Allows you to register emoji to their options. Supported option attributes are:
+        {
+          src: image location
+          code: the code to set on the element class i.e. "emoji-#{code}"
+          attrs: arbitrary attributes to set on the resulting replaced element. Given as object.
+        }
+    */
+    emojie.register = function(emoji, options) {
       var i;
       for (i = 1; i < emoji.length; i++) {
         emojis[emoji.slice(0, i)] = true;
       }
-      emojis[emoji] = image;
+      emojis[emoji] = options;
     }
 
     return emojie;
