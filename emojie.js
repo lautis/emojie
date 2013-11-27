@@ -25,7 +25,11 @@
     var element = document.createElement("img");
 
     element.setAttribute("src", emojiHash["src"]);
-    element.className = "emojie " + "emojie-" + emojiHash["code"];
+    className = "emojie"
+    if (emojiHash["code"] != undefined) {
+      className += "emojie-" + emojiHash["code"];
+    }
+    element.className = className
 
     for (attr in emojiHash["attrs"]) {
       element.setAttribute(attr, emojiHash["attrs"][attr])

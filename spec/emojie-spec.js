@@ -41,4 +41,11 @@ describe("emojie", function() {
     expect(node.find("img").attr("title")).toEqual(":foo_bar:");
   });
 
+  it ("does not require the code option to be set", function() {
+    emojie.register("\ud83d\ude04", {src: "http://localhost/emoji/emoji.png", attrs: { title: ":foo_bar:", id: "test-id" } });
+    var node = $("<div>").text("foo \ud83d\ude04");
+    emojie(node[0]);
+    expect(node.find("img")[0].className).toBe("emojie");
+  });
+
 });
