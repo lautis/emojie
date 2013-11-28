@@ -20,12 +20,19 @@
     traverseTextNodes(root.firstChild, callback);
   }
 
-  function emojiElement(emojiHash) {
+  function emojiElement(emoji, options) {
+    var element;
+    if (options["elementName"] != undefined) {
+      element = document.createElement(options["elementName"]);
+      element.textContent = options["content"];
+      delete options["content"];
+      delete options["elementName"];
+    } else {
+      element = document.createElement("img");
+    }
 
-    var element = document.createElement("img");
-
-    for (attr in emojiHash) {
-      element.setAttribute(attr, emojiHash[attr])
+    for (attr in options) {
+      element.setAttribute(attr, options[attr])
     }
     return element
   }
@@ -47,8 +54,7 @@
           if (emoji.length > buffer.length) {
             rest = emoji.splitText(buffer.length);
           }
-
-          node.parentNode.replaceChild(emojiElement(emojis[buffer]), emoji);
+          node.parentNode.replaceChild(emojiElement(emoji, emojis[buffer]), emoji);
 
           if (rest) {
             return replacer(rest);
@@ -99,14 +105,7 @@
       }
       return node;
     }
-    /*
-      Allows you to register emoji to their options. Supported option attributes are:
-        {
-          src: image location
-          code: the code to set on the element class i.e. "emoji-#{code}"
-          attrs: arbitrary attributes to set on the resulting replaced element. Given as object.
-        }
-    */
+
     emojie.register = function(emoji, options) {
       var i;
       for (i = 1; i < emoji.length; i++) {

@@ -47,4 +47,11 @@ describe("emojie", function() {
     expect(node.find("img")[0].className).toBe("emojie emojie-1f604");
   });
 
+  it ("allows setting a custom element type and content", function() {
+    emojie.register("\ud83d\ude04", { elementName: "span", content: "\ud83d\ude04" });
+    var node = $("<div>").text("Cool \ud83d\ude04");
+    emojie(node[0]);
+    expect(node.html()).toBe("Cool <span>\ud83d\ude04</span>");
+  });
+
 });
