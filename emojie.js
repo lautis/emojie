@@ -21,18 +21,13 @@
   }
 
   function emojiElement(emoji, options) {
-    var element;
-    if (options["elementName"] != undefined) {
-      element = document.createElement(options["elementName"]);
-      element.textContent = options["content"];
-      delete options["content"];
-      delete options["elementName"];
-    } else {
-      element = document.createElement("img");
-    }
+    var element = document.createElement(options["elementName"] || "img");
+    element.textContent = options["content"];
 
     for (attr in options) {
-      element.setAttribute(attr, options[attr])
+      if (attr != "content" && attr != "elementName") {
+        element.setAttribute(attr, options[attr])
+      }
     }
     return element
   }
