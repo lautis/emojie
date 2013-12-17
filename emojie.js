@@ -22,7 +22,9 @@
 
   function emojiElement(emoji, options) {
     var element = document.createElement(options["elementName"] || "img");
-    element.textContent = options["content"];
+    if (options["content"] != null) {
+      element.textContent = options["content"];
+    }
 
     for (attr in options) {
       if (attr != "content" && attr != "elementName") {
