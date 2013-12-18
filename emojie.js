@@ -10,14 +10,19 @@
 
   function traverseTextNodes(root, callback) {
     if (root == null) { return; }
-
-    traverseTextNodes(root.nextSibling, callback);
-
-    if (root.nodeType == 3) {
-      return callback(root);
+    var stack = [root];
+    var children, i, node;
+    while (stack.length > 0) {
+      node = stack.pop();
+      if (node.nodeType == 3) {
+        callback(node);
+      } else {
+        children = node.childNodes.length;
+        for (i = children - 1; i >= 0; --i) {
+          stack.push(node.childNodes[i]);
+        }
+      }
     }
-
-    traverseTextNodes(root.firstChild, callback);
   }
 
   function emojiElement(emoji, options) {
@@ -98,7 +103,7 @@
       if (node.nodeType == 3) {
         replacer(node);
       } else {
-        traverseTextNodes(node.firstChild, replacer);
+        traverseTextNodes(node, replacer);
       }
       return node;
     }
