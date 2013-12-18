@@ -16,7 +16,7 @@
       node = stack.pop();
       if (node.nodeType == 3) {
         callback(node);
-      } else {
+      } else if (node.getAttribute("data-no-emojie") == null) {
         children = node.childNodes.length;
         for (i = children - 1; i >= 0; --i) {
           stack.push(node.childNodes[i]);

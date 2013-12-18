@@ -35,7 +35,7 @@ describe("emojie", function() {
     expect(node.html().split("<img ").length).toBe(3)
   });
 
-  it ("supports title attributign elements", function() {
+  it ("supports title attributing elements", function() {
     var node = $("<div>").text("foo \ud83d\ude04 bar");
     emojie(node[0]);
     expect(node.find("img").attr("title")).toEqual(":foo_bar:");
@@ -48,10 +48,20 @@ describe("emojie", function() {
   });
 
   it ("allows setting a custom element type and content", function() {
-    emojie.register("\ud83d\ude04", { elementName: "span", content: "\ud83d\ude04" });
-    var node = $("<div>").text("Cool \ud83d\ude04");
+    emojie.register("\ud83d\ude05", { elementName: "span", content: "\ud83d\ude05" });
+    var node = $("<div>").text("Cool \ud83d\ude05");
     emojie(node[0]);
-    expect(node.html()).toBe("Cool <span>\ud83d\ude04</span>");
+    expect(node.html()).toBe("Cool <span>\ud83d\ude05</span>");
   });
+
+  it ("skips elements with data-no-emojie", function() {
+    var node = $("<div data-no-emojie>").append(
+      $("<span>").text("e \ud83d\ude04 moji"),
+      $("<span>").text("e \ud83d\ude04 moji")
+    );
+    emojie(node[0]);
+    expect(node.find("img").length).toBe(0);
+  });
+
 
 });
