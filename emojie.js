@@ -6,9 +6,7 @@
  */
 
 (function(window, undefined) {
-  var emojis = {};
-
-  function traverseTextNodes(root, callback) {
+  function traverseTextNodes(root, options, callback) {
     if (root == null) { return; }
     var stack = [root];
     var children, i, node;
@@ -16,7 +14,7 @@
       node = stack.pop();
       if (node.nodeType == 3) {
         callback(node);
-      } else if (node.getAttribute("data-no-emojie") == null) {
+      } else if (node.getAttribute(options.ignoreAttribute || "data-no-emojie") == null) {
         children = node.childNodes.length;
         for (i = children - 1; i >= 0; --i) {
           stack.push(node.childNodes[i]);
@@ -93,17 +91,16 @@
     }
   }
 
-  function Emojie() {
+  function Emojie(options) {
     var emojis = {};
 
     function emojie(node) {
-
       var replacer = textNodeReplacer(emojis);
 
       if (node.nodeType == 3) {
         replacer(node);
       } else {
-        traverseTextNodes(node, replacer);
+        traverseTextNodes(node, options || {}, replacer);
       }
       return node;
     }

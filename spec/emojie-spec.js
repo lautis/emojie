@@ -63,5 +63,16 @@ describe("emojie", function() {
     expect(node.find("img").length).toBe(0);
   });
 
+  it ("can configure ignore attribute", function() {
+    var textEmoji = Emojie({ignoreAttribute: "data-no-text-emoji"});
+    textEmoji.register(":foo:", { class: "emojie", src: "http://localhost/emoji/emoji.png", title: ":foo:", id: "test-id" });
+
+    var node = $("<div data-no-text-emoji>").append(
+      $("<span>").text(":foo:"),
+      $("<span>").text("foo :foo: foo")
+    );
+    textEmoji(node[0]);
+    expect(node.find("img").length).toBe(0);
+  });
 
 });
