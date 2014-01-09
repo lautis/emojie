@@ -84,4 +84,17 @@ describe("emojie", function() {
     expect(node.find("img").attr("title")).toBe(":foobar:");
   });
 
+  it ("can merge two emojie instances to one", function() {
+    var a = Emojie();
+    a.register("foo", { class: "emojie", src: "http://localhost/emoji/foo.png", title: ":foo:"});
+    var b = Emojie();
+    b.register("foobar", { class: "emojie", src: "http://localhost/emoji/foobar.png", title: ":foobar:"});
+    a.merge(b);
+    var node = $("<span>").text("foobar foo");
+    a(node[0]);
+    var titles = node.find("img").map(function() { return this.title; }).toArray();
+    expect(titles).toEqual([":foobar:", ":foo:"]);
+  });
+
+
 });

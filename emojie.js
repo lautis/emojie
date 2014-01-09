@@ -104,6 +104,7 @@
       }
       return node;
     }
+    emojie._emojis = emojis;
 
     emojie.register = function(emoji, options) {
       var i, slice;
@@ -114,6 +115,30 @@
         }
       }
       emojis[emoji] = options;
+      return emojie;
+    }
+
+    emojie.merge = function(other) {
+      function choose(a, b) {
+        if (a && b) {
+          if (a == true) {
+            return b;
+          } else if (b == true) {
+            return a;
+          } else {
+            return a;
+          }
+        } else {
+          return a || b;
+        }
+      }
+      var key, value;
+      for (key in other._emojis) {
+        if (other._emojis.hasOwnProperty(key)) {
+          emojis[key] = choose(other._emojis[key], emojis[key]);
+        }
+      }
+      return emojie;
     }
 
     return emojie;
