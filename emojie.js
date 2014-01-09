@@ -46,7 +46,7 @@
 
       for (i = 0; i < string.length; i++) {
         buffer += string[i];
-        if (emojis[buffer] === true) {
+        if (emojis[buffer] === true || emojis[buffer] && emojis[buffer + string[i + 1]]) {
           continue;
         } else if (emojis[buffer]) {
           emoji = node.splitText(i - buffer.length + 1);
@@ -106,9 +106,12 @@
     }
 
     emojie.register = function(emoji, options) {
-      var i;
+      var i, slice;
       for (i = 1; i < emoji.length; i++) {
-        emojis[emoji.slice(0, i)] = true;
+        slice = emoji.slice(0, i);
+        if (!(slice in emojis)) {
+          emojis[slice] = true;
+        }
       }
       emojis[emoji] = options;
     }

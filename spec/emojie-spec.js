@@ -75,4 +75,13 @@ describe("emojie", function() {
     expect(node.find("img").length).toBe(0);
   });
 
+  it ("selects longest possible match", function() {
+    var emojie = Emojie();
+    emojie.register("foo", { class: "emojie", src: "http://localhost/emoji/foo.png", title: ":foo:"});
+    emojie.register("foobar", { class: "emojie", src: "http://localhost/emoji/foobar.png", title: ":foobar:"});
+    var node = $("<span>").text("foobar");
+    emojie(node[0]);
+    expect(node.find("img").attr("title")).toBe(":foobar:");
+  });
+
 });
