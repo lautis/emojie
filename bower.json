@@ -1,0 +1,21 @@
+{
+  "name": "emojie",
+  "main": "emojie.js",
+  "version": "0.1.0",
+  "homepage": "https://github.com/lautis/emojie",
+  "authors": [
+    "Ville Lautanala <lautis@gmail.com>"
+  ],
+  "description": "Image fallback for emoji",
+  "keywords": [
+    "emoji"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
