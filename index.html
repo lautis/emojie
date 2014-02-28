@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Emojie : Image fallback for emoji" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Emojie</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/lautis/emojie">View on GitHub</a>
+
+          <h1 id="project_title">Emojie</h1>
+          <h2 id="project_tagline">Image fallback for emoji</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/lautis/emojie/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/lautis/emojie/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <p>JavaScript library which aims to provide fallbacks for Emoji glyphs as images.</p>
+
+<p>Emoji sets:</p>
+
+<ul>
+<li>
+<a href="https://github.com/lautis/emojie-iphone">emojie-iphone</a> - image replacements using Apple color emoji</li>
+</ul><h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<div class="highlight highlight-javascript"><pre><span class="c1">// Define mappings to images</span>
+<span class="nx">emojie</span><span class="p">.</span><span class="nx">register</span><span class="p">(</span><span class="s2">"\ud83d\ude04"</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
+<span class="nx">emojie</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">);</span>
+</pre></div>
+
+<p>Options is set individually for each emoji. All options will be transfered as attributes to the img element, so you might want to at least set the src attribute.</p>
+
+<p>An example to clarify:</p>
+
+<div class="highlight highlight-javascript"><pre><span class="nx">emojie</span><span class="p">.</span><span class="nx">register</span><span class="p">(</span><span class="s2">"\ud83d\ude04"</span><span class="p">,</span> <span class="p">{</span> <span class="nx">src</span><span class="o">:</span> <span class="s2">"emoji/smile.png"</span><span class="p">,</span> <span class="kr">class</span><span class="o">:</span> <span class="s2">"smile"</span><span class="p">,</span> <span class="nx">title</span><span class="o">:</span> <span class="s2">"smile!"</span><span class="p">,</span> <span class="nx">id</span><span class="o">:</span> <span class="s2">"example-smiley"</span> <span class="p">});</span>
+<span class="nx">emojie</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">);</span>
+<span class="c1">// &lt;img src="emoji/smile.png" id="example-smiley" class="emojie emojie-smile" title="smile!"&gt;</span>
+</pre></div>
+
+<p>There is only one exception: you can set the elementName and content options to wrap the emoji inside an element of the given type and set it's content to the content option. This is useful if one want's to use images in Chrome and real emojis in Safari wrapped in a span element perhaps.</p>
+
+<p>To ignore elements from emojification, set <code>data-no-emoji</code> attribute. For example,</p>
+
+<div class="highlight highlight-html"><pre><span class="nt">&lt;div&gt;</span>
+  <span class="nt">&lt;p&gt;</span>This will get emojified.<span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;p</span> <span class="na">data-no-emojie</span><span class="nt">&gt;</span>But this won't.<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Emojie maintained by <a href="https://github.com/lautis">lautis</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
