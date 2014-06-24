@@ -1,4 +1,4 @@
-# Emojie
+# Emojie [![Build Status](https://travis-ci.org/lautis/emojie.svg?branch=master)](https://travis-ci.org/lautis/emojie)
 
 JavaScript library which aims to provide fallbacks for Emoji glyphs as images.
 
