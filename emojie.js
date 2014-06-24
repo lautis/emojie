@@ -5,7 +5,15 @@
  * Licensed under the MIT license
  */
 
-(function(window, undefined) {
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    define([], factory);
+  } else if (typeof exports === 'object') {
+    module.exports = factory();
+  } else {
+    root.Emojie = factory();
+  }
+}(this, function() {
   function traverseTextNodes(root, options, callback) {
     if (!root) { return; }
     var stack = [root];
@@ -142,5 +150,5 @@
 
     return emojie;
   }
-  window.Emojie = Emojie;
-}(window));
+  return Emojie;
+}));
