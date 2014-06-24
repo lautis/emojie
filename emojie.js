@@ -7,7 +7,7 @@
 
 (function(window, undefined) {
   function traverseTextNodes(root, options, callback) {
-    if (root == null) { return; }
+    if (!root) { return; }
     var stack = [root];
     var children, i, node;
     while (stack.length > 0) {
@@ -24,17 +24,19 @@
   }
 
   function emojiElement(emoji, options) {
-    var element = document.createElement(options["elementName"] || "img");
-    if (options["content"] != null) {
-      element.textContent = options["content"];
+    var attr;
+    var element = document.createElement(options.elementName || "img");
+
+    if (options.content) {
+      element.textContent = options.content;
     }
 
     for (attr in options) {
       if (attr != "content" && attr != "elementName") {
-        element.setAttribute(attr, options[attr])
+        element.setAttribute(attr, options[attr]);
       }
     }
-    return element
+    return element;
   }
 
   function textNodeReplacer(emojis) {
@@ -65,7 +67,7 @@
           buffer = "";
         }
       }
-    }
+    };
   }
 
   Emojie.canRender = function(emoji) {
@@ -89,7 +91,7 @@
     } catch (ex) {
       return false;
     }
-  }
+  };
 
   function Emojie(options) {
     var emojis = {};
@@ -116,22 +118,19 @@
       }
       emojis[emoji] = options;
       return emojie;
-    }
+    };
 
     emojie.merge = function(other) {
       function choose(a, b) {
-        if (a && b) {
-          if (a == true) {
-            return b;
-          } else if (b == true) {
-            return a;
-          } else {
-            return a;
-          }
+        if (a === true && b) {
+          return b;
+        } else if (a && b) {
+          return a;
         } else {
           return a || b;
         }
       }
+
       var key, value;
       for (key in other._emojis) {
         if (other._emojis.hasOwnProperty(key)) {
@@ -139,7 +138,7 @@
         }
       }
       return emojie;
-    }
+    };
 
     return emojie;
   }
