@@ -1,3 +1,6 @@
+Emojie = require('../emojie');
+$ = require('jquery');
+
 describe("emojie", function() {
   var emojie = Emojie();
   emojie.register("\ud83d\ude04", { class: "emojie emojie-1f604", src: "http://localhost/emoji/emoji.png", title: ":foo_bar:", id: "test-id" });

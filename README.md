@@ -35,3 +35,27 @@ To ignore elements from emojification, set `data-no-emoji` attribute. For exampl
   <p data-no-emojie>But this won't.</p>
 </div>
 ```
+
+## Hacking
+
+The build process runs on [gulp](http://gulpjs.com). Assuming npm is installed,
+dependencies can be installed by running
+
+    $ npm install
+
+After that, you can run use local gulp from `./node_modules/.bin/gulp` or
+have it installed globally with
+
+    $ npm install -g gulp
+
+Then you should be able to run tests with
+
+    $ gulp test
+
+To continously run tests after file changes use
+
+    $ gulp watch
+
+There's also a gulp task for compiling minified JS file:
+
+    $ gulp dist
