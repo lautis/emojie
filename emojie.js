@@ -93,6 +93,7 @@
 
     try {
       var ctx = document.createElement("canvas").getContext("2d");
+      ctx.textBaseline = "top";
       ctx.fillText(emoji, 0, 0);
 
       return hasColor(ctx, 10);
